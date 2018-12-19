@@ -4,6 +4,8 @@ import Home from './views/Home.vue'
 import Map from './views/Map.vue'
 import Join from './views/Join.vue'
 import SignIn from './views/SignIn.vue'
+import Admin from './views/Admin.vue'
+import store from './store/store'
 
 Vue.use(Router)
 
@@ -38,6 +40,18 @@ export default new Router({
             path: '/signin',
             name: 'signin',
             component: SignIn
+        },
+        {
+            path: '/admin',
+            name: 'admin',
+            component: Admin
+            // beforeEnter: (to, from, next) => {
+            //     if (store.state.isUserLoggedIn) {
+            //         next()
+            //     } else {
+            //         next('/')
+            //     }
+            // }
         }
     ]
 })

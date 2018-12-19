@@ -38,6 +38,7 @@
             </v-menu>
             <v-btn flat class="hidden-sm-and-down" to="/map">Map</v-btn>
             <v-spacer class="hidden-sm-and-down"></v-spacer>
+            <v-btn v-if="!$store.state.isUserLoggedIn" class="hidden-sm-and-down" to="/admin">Admin</v-btn>
             <v-btn v-if="$store.state.isUserLoggedIn" flat class="hidden-sm-and-down" @click="signOut">Sign Out</v-btn>
             <v-btn v-if="!$store.state.isUserLoggedIn" flat class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
             <v-btn v-if="!$store.state.isUserLoggedIn" color="brown lighten-3" class="hidden-sm-and-down" to="/join">Sign Up</v-btn>

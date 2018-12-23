@@ -1,6 +1,6 @@
 <template>
     <v-carousel
-        height="800"
+        height="600"
         delimiter-icon="stop"
         prev-icon="mdi-arrow-left"
         next-icon="mdi-arrow-right">
@@ -19,15 +19,15 @@ export default {
   data () {
     return {
       images: [{
-        src: require('@/assets/hh-home.jpg')
+        src: require('@/assets/home_carousel/LittleBlueHeron-1_180511_140535_HeronHaven.jpg')
       }, {
-        src: require('@/assets/hh-boardwalk.jpg')
+        src: require('@/assets/home_carousel/Bloodroot.jpg')
       }, {
-        src: require('@/assets/hh-home.jpg')
+        src: require('@/assets/home_carousel/ConeFlower.jpg')
       }, {
-        src: require('@/assets/hh-home.jpg')
+        src: require('@/assets/home_carousel/MilkWeedBeetle.jpg')
       }, {
-        src: require('@/assets/hh-home.jpg')
+        src: require('@/assets/home_carousel/Muskrat_130408_164221_Heron Haven.jpg')
       }]
     }
   }

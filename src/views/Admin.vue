@@ -9,12 +9,12 @@
 import UserService from '@/services/UserService'
 
 export default {
-   data() {
-       return {
-           users: null
-       }
-   },
-   async mounted() {
+    data() {
+        return {
+            users: null
+        }
+    },
+    async mounted() {
        this.users = await UserService.getAllUsers()
    }
 }

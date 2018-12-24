@@ -2,7 +2,7 @@
     <span>
         <v-navigation-drawer app v-model="drawer" class="brown lighten-2" dark disable-resize-watcher>
             <v-list>
-                <template v-for="(item, index) in items">
+                <template v-for="(item, index) in DrawerItems">
                     <v-list-tile :key="index" :to="item.route">
                         <v-list-tile-content>
                             {{item.title}}
@@ -21,6 +21,7 @@
             </router-link>
 
             <v-spacer class="hidden-sm-and-down"></v-spacer>
+
             <v-menu class="hidden-sm-and-down" open-on-hover nudge-bottom="38">
                 <v-btn
                     slot="activator"
@@ -29,14 +30,30 @@
                 </v-btn>
                 <v-list>
                     <v-list-tile
-                        v-for="(item, index) in friends"
+                        v-for="(item, index) in friendsItems"
                         :key="index"
                         to="/">
+                        <v-list-tile-title :to="item.route">{{item.title}}</v-list-tile-title>
+                    </v-list-tile>
+                </v-list>
+            </v-menu>
+
+            <v-menu class="hidden-sm-and-down" open-on-hover nudge-bottom="38">
+                <v-btn
+                    slot="activator"
+                    color="brown lighten-3"
+                    dark>About Us
+                </v-btn>
+                <v-list>
+                    <v-list-tile
+                        v-for="(item, index) in aboutItems"
+                        :key="index"
+                        :to="item.route">
                         <v-list-tile-title>{{item.title}}</v-list-tile-title>
                     </v-list-tile>
                 </v-list>
             </v-menu>
-            <v-btn flat class="hidden-sm-and-down" to="/map">Map</v-btn>
+
             <v-spacer class="hidden-sm-and-down"></v-spacer>
             <v-btn v-if="!$store.state.isUserLoggedIn" class="hidden-sm-and-down" to="/admin">Admin</v-btn>
             <v-btn v-if="$store.state.isUserLoggedIn" flat class="hidden-sm-and-down" @click="signOut">Sign Out</v-btn>
@@ -53,15 +70,19 @@ export default {
         return {
             appTitle: 'Heron Haven',
             drawer: false,
-            items: [
+            DrawerItems: [
                 { title: 'Home', route: '/' },
                 { title: 'Sign In', route: '/signin' },
                 { title: 'Join', route: '/join' }
             ],
-            friends: [
+            friendsItems: [
                 { title: 'Information' },
                 { title: 'Membership Application' },
                 { title: 'Contact us' }
+            ],
+            aboutItems: [
+                { title: 'Our History', route: '/history' },
+                { title: 'Directions', route: '/map' }
             ]
         }
     },

@@ -5,7 +5,9 @@ import Map from './views/Map.vue'
 import Join from './views/Join.vue'
 import SignIn from './views/SignIn.vue'
 import Admin from './views/Admin.vue'
-import store from './store/store'
+import OurHistory from './views/OurHistory'
+
+// import store from './store/store'
 
 Vue.use(Router)
 
@@ -52,6 +54,11 @@ export default new Router({
             //         next('/')
             //     }
             // }
+        },
+        {
+            path: '/history',
+            name: 'history',
+            component: OurHistory
         }
     ]
 })

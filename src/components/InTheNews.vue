@@ -1,10 +1,10 @@
 <template>
-    <v-container grid-list-lg>
+    <v-container grid-list-lg elevation-4 class="my-4 ml-4 mr-2">
         <v-layout row>
             <v-flex xs12 class="text-xs-center display-1 font-weight-black my-5">In the News</v-flex>
         </v-layout>
         <v-layout row wrap>
-            <v-flex xs12 sm12 md4 v-for="(item, index) in news" :key="index">
+            <v-flex xs12 sm12 md6 v-for="(item, index) in news" :key="index">
                 <a :href="item.link">
                     <v-card dark>
                         <v-img :src="item.image" height="300px"></v-img>

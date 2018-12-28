@@ -78,7 +78,6 @@
 
 <script>
 export default {
-    
 }
 </script>
 
@@ -87,5 +86,3 @@ export default {
         padding: 20px 100px;
     }
 </style>
-
-

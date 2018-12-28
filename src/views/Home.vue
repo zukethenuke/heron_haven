@@ -1,7 +1,8 @@
 <template>
-    <v-container grid-list-md fluid>
+    <v-container grid-list-lg fluid>
         <home-carousel></home-carousel>
         <v-layout elevation-4 row wrap class="mt-4">
+            <Welcome></Welcome>
             <v-flex xs12 sm6 md6 class="pr-4">
                 <in-the-news></in-the-news>
             </v-flex>
@@ -17,13 +18,15 @@
 import HomeCarousel from '@/components/HomeCarousel.vue'
 import InTheNews from '@/components/InTheNews.vue'
 import OnTheWeb from '@/components/OnTheWeb.vue'
+import Welcome from '@/components/Welcome.vue'
 
 export default {
     name: 'home',
     components: {
         HomeCarousel,
         InTheNews,
-        OnTheWeb
+        OnTheWeb,
+        Welcome
     }
 }
 </script>

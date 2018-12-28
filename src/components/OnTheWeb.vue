@@ -1,5 +1,5 @@
 <template>
-    <v-container grid-list-lg elevation-4 class="my-4 ml-2 mr-4">
+    <v-container grid-list-lg elevation-4 class="my-4 mr-4">
         <v-layout row>
             <v-flex xs12 class="text-xs-center display-1 font-weight-black my-5">On The Web</v-flex>
         </v-layout>

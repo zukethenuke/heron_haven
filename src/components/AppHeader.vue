@@ -55,10 +55,10 @@
             </v-menu>
 
             <v-spacer class="hidden-sm-and-down"></v-spacer>
-            <!-- <v-btn v-if="!$store.state.isUserLoggedIn" class="hidden-sm-and-down" to="/admin">Admin</v-btn>
+            <!-- <v-btn v-if="!$store.state.isUserLoggedIn" class="hidden-sm-and-down" to="/admin">Admin</v-btn> -->
             <v-btn v-if="$store.state.isUserLoggedIn" flat class="hidden-sm-and-down" @click="signOut">Sign Out</v-btn>
             <v-btn v-if="!$store.state.isUserLoggedIn" flat class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
-            <v-btn v-if="!$store.state.isUserLoggedIn" color="brown lighten-3" class="hidden-sm-and-down" to="/join">Sign Up</v-btn> -->
+            <!-- <v-btn v-if="!$store.state.isUserLoggedIn" color="brown lighten-3" class="hidden-sm-and-down" to="/join">Sign Up</v-btn> -->
         </v-toolbar>
     </span>
 </template>
@@ -71,8 +71,8 @@ export default {
             appTitle: 'Heron Haven',
             drawer: false,
             DrawerItems: [
-                { title: 'Home', route: '/' }
-                // { title: 'Sign In', route: '/signin' },
+                { title: 'Home', route: '/' },
+                { title: 'Sign In', route: '/signin' },
                 // { title: 'Join', route: '/join' }
             ],
             friendsItems: [

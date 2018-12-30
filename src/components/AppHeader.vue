@@ -32,7 +32,7 @@
                     <v-list-tile
                         v-for="(item, index) in friendsItems"
                         :key="index"
-                        to="/">
+                        :to="item.route">
                         <v-list-tile-title :to="item.route">{{item.title}}</v-list-tile-title>
                     </v-list-tile>
                 </v-list>
@@ -76,10 +76,11 @@ export default {
                 // { title: 'Join', route: '/join' }
             ],
             friendsItems: [
-                { title: 'Our Favorite Links' },
-                { title: '2nd Saturday Programs' },
-                { title: 'Membership Application' },
-                { title: 'Contact us' }
+                { title: 'Volunteer Oppertunities', route: '/volunteer' },
+                { title: 'Our Favorite Links', route: '/links' },
+                { title: '2nd Saturday Programs', route: '/programs/2nd_saturday' },
+                { title: 'Membership Application', route: '/membership' },
+                { title: 'Contact us', route: '/contact_us' }
             ],
             aboutItems: [
                 { title: 'Our History', route: '/history' },

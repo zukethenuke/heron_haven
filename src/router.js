@@ -4,8 +4,9 @@ import Home from './views/Home.vue'
 import Map from './views/Map.vue'
 import Join from './views/Join.vue'
 import SignIn from './views/SignIn.vue'
-import Admin from './views/Admin.vue'
+import About from './views/About.vue'
 import OurHistory from './views/OurHistory'
+import Volunteer from './views/Volunteer'
 
 // import store from './store/store'
 
@@ -23,10 +24,7 @@ export default new Router({
         {
             path: '/about',
             name: 'about',
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+            component: About
         },
         {
             path: '/map',
@@ -46,7 +44,8 @@ export default new Router({
         {
             path: '/admin',
             name: 'admin',
-            component: Admin
+            component: () => import(/* webpackChunkName: "admin" */ './views/Admin.vue')
+            // component: Admin
             // beforeEnter: (to, from, next) => {
             //     if (store.state.isUserLoggedIn) {
             //         next()
@@ -59,6 +58,10 @@ export default new Router({
             path: '/history',
             name: 'history',
             component: OurHistory
+        }, {
+            path: '/volunteer',
+            name: 'volunteer',
+            component: Volunteer
         }
     ]
 })

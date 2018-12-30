@@ -1,5 +1,5 @@
 <template>
-    <v-layout row>
+    <div>
         <v-flex xs10 md6 offset-xs1 offset-md3>
             <div class="white elevation-2 mt-4">
                 <v-toolbar flat dense class="brown lighten-2" dark>
@@ -7,7 +7,6 @@
                 </v-toolbar>
                 <div class="pl-4 pr-4 pt-2 pb-2">
                     <v-text-field
-                        v-validate="'required|email'"
                         type="email"
                         v-model="email"
                         label="E-mail"
@@ -15,7 +14,6 @@
                         required
                     ></v-text-field>
                     <v-text-field
-                        v-validate="'required|password'"
                         type="password"
                         v-model="password"
                         label="Password"
@@ -28,7 +26,7 @@
                 </div>
             </div>
         </v-flex>
-    </v-layout>
+    </div>
 </template>
 
 <script>

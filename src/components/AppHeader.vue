@@ -73,6 +73,7 @@ export default {
             DrawerItems: [
                 { title: 'Home', route: '/' },
                 { title: 'Sign In', route: '/signin' },
+                { title: 'Our History', route: '/history'}
                 // { title: 'Join', route: '/join' }
             ],
             friendsItems: [

@@ -1,37 +1,43 @@
 <template>
     <div class="white elevation-2 contact-us">
         <v-toolbar flat dense class="brown lighten-2" dark>
-            <v-toolbar-title>{{title}}</v-toolbar-title>
+            <v-toolbar-title>{{contactFormData.title}}</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
              <v-text-field
-                type="firstName"
-                v-model="firstName"
+                type="form.firstName"
+                v-model="form.firstName"
                 label="First Name"
                 data-vv-name="firstName"
                 required
             ></v-text-field>
              <v-text-field
-                type="lastName"
-                v-model="lastName"
+                type="form.lastName"
+                v-model="form.lastName"
                 label="Last Name"
                 data-vv-name="lastName"
                 required
             ></v-text-field>
             <v-text-field
-                type="email"
-                v-model="email"
+                type="form.email"
+                v-model="form.email"
                 label="E-mail"
                 data-vv-name="email"
                 required
             ></v-text-field>
+            <v-text-field
+                type="form.phoneNumber"
+                v-model="form.phoneNumber"
+                label="Phone Number"
+                data-vv-name="phoneNumber"
+            ></v-text-field>
             <v-select
-                v-model="selectedVolunteerType"
-                :items="volunteerTypes"
-                label="Select volunteer type"
+                v-model="form.selectedOption"
+                :items="contactFormData.options"
+                label="How would you like to volunteer"
             ></v-select>
             <v-textarea
-                v-model="message"
+                v-model="form.message"
                 auto-grow
                 box
                 label="Message"
@@ -44,27 +50,23 @@
 </template>
 
 <script>
+import ContactUsService from '@/services/ContactUsService';
+
 export default {
-    props: ['title'],
+    props: ['contactFormData'],
     data() {
         return {
             error: '',
-            firstName: '',
-            lastName: '',
-            email: '',
-            selectedVolunteerType: '',
-            volunteerTypes: [
-                { text: 'Education' },
-                { text: 'Grounds Keeping' },
-                { text: 'Social Media' },
-                { text: 'Building Staff' },
-                { text: 'Volunteer Coordinator' }
-            ],
-            message: ''
+            form: {
+                type: this.contactFormData.type
+            }
         }
     },
     methods: {
-        send: () => console.log('submitting')
+        send() {
+            console.log('submitting', this.form);
+            ContactUsService.submit(this.form);
+        }
     }
 }
 </script>

@@ -11,25 +11,32 @@ export default new Vuex.Store({
         isUserLoggedIn: false
     },
     mutations: {
-        setToken (state, token) {
+        setToken(state, token) {
             state.token = token
             state.isUserLoggedIn = !!token
-            // if (token) {
-            //     state.isUserLoggedIn = true
-            // } else {
-            //     state.isUserLoggedIn = false
-            // }
         },
-        setUser (state, user) {
+        setUser(state, user) {
             state.user = user
+        },
+        setAppEnv(state, env) {
+            state.env = env
+        },
+        setBaseURL(state, url) {
+            state.baseURL = url
         }
     },
     actions: {
-        setToken ({ commit }, token) {
+        setToken({ commit }, token) {
             commit('setToken', token) // call the mutation called setToken and pass it token
         },
-        setUser ({ commit }, user) {
+        setUser({ commit }, user) {
             commit('setUser', user)
+        },
+        setAppEnv({ commit }, env) {
+            commit('setAppEnv', env)
+        },
+        setBaseURL({ commit }, url) {
+            commit('setBaseURL', url)
         }
     }
 })

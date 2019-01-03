@@ -1,8 +1,11 @@
 import axios from 'axios'
+import store from '@/store/store'
 
 export default () => {
+    var env = store.state.env
+    var apiURL = store.state.baseURL
+    var baseURL = env === 'dev' ? `http://${apiURL}:8081` : `https://${apiURL}`
     return axios.create({
-        baseURL: `http://localhost:8081`
-        // baseURL: `https://heron-haven-api.herokuapp.com`
+        baseURL
     })
 }

@@ -6,6 +6,7 @@ import router from './router'
 import store from './store/store'
 import { sync } from 'vuex-router-sync'
 import './registerServiceWorker'
+import AppConfigService from './services/AppConfigService'
 
 Vue.config.productionTip = false
 
@@ -16,3 +17,5 @@ new Vue({
     store,
     render: h => h(App)
 }).$mount('#app')
+
+AppConfigService.setAppEnv()

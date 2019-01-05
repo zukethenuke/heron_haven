@@ -7,6 +7,7 @@ import SignIn from './views/SignIn.vue'
 import About from './views/About.vue'
 import OurHistory from './views/OurHistory'
 import Volunteer from './views/Volunteer'
+import ContactUs from './views/ContactUs'
 
 // import store from './store/store'
 
@@ -62,6 +63,10 @@ export default new Router({
             path: '/volunteer',
             name: 'volunteer',
             component: Volunteer
+        }, {
+            path: '/contact_us',
+            name: 'contactUs',
+            component: ContactUs
         }
     ]
 })

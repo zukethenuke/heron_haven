@@ -1,24 +1,25 @@
 <template>
     <div>
         <v-flex xs12 md8 l6 offset-md2>
-            <contact-us :contactFormData="contactFormData"></contact-us>
+            <contact-us-form :contactFormData="contactFormData"></contact-us-form>
         </v-flex>
     </div>
 </template>
 
 <script>
-import ContactUs from '@/components/ContactUs';
+import ContactUsForm from '@/components/ContactUsForm';
 
 export default {
     name: 'volunteer',
     components: {
-        ContactUs
+        ContactUsForm
     },
     data() {
         return {
             contactFormData: {
                 title: "Request information about volunteering",
                 type: 'volunteer',
+                optionsLabel: 'How would you like to volunteer',
                 options: [
                     { text: 'Education' },
                     { text: 'Grounds Keeping' },

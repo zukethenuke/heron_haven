@@ -32,9 +32,10 @@
                 data-vv-name="phoneNumber"
             ></v-text-field>
             <v-select
+                v-if="contactFormData.options"
                 v-model="form.selectedOption"
                 :items="contactFormData.options"
-                label="How would you like to volunteer"
+                :label="contactFormData.optionsLabel"
             ></v-select>
             <v-textarea
                 v-model="form.message"

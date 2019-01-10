@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ContactUsForm from '@/components/ContactUsForm';
+import ContactUsForm from '@/components/ContactUsForm'
 
 export default {
     name: 'contactUs',
@@ -22,7 +22,6 @@ export default {
             }
         }
     }
-    
 }
 </script>
 

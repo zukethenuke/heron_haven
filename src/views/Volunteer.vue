@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ContactUsForm from '@/components/ContactUsForm';
+import ContactUsForm from '@/components/ContactUsForm'
 
 export default {
     name: 'volunteer',
@@ -17,7 +17,7 @@ export default {
     data() {
         return {
             contactFormData: {
-                title: "Request information about volunteering",
+                title: 'Request information about volunteering',
                 type: 'volunteer',
                 optionsLabel: 'How would you like to volunteer',
                 options: [

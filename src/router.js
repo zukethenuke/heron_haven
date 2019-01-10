@@ -9,6 +9,8 @@ import OurHistory from './views/OurHistory'
 import Volunteer from './views/Volunteer'
 import ContactUs from './views/ContactUs'
 
+import Members from './views/Admin/components/Members'
+
 // import store from './store/store'
 
 Vue.use(Router)
@@ -45,8 +47,14 @@ export default new Router({
         {
             path: '/admin',
             name: 'admin',
-            component: () => import(/* webpackChunkName: "admin" */ './views/Admin.vue')
-            // component: Admin
+            component: () => import(/* webpackChunkName: "admin" */ './views/Admin/Admin.vue'),
+            children: [
+                {
+                    path: 'members',
+                    name: 'members',
+                    component: Members
+                }
+            ]
             // beforeEnter: (to, from, next) => {
             //     if (store.state.isUserLoggedIn) {
             //         next()

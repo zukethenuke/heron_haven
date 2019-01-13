@@ -8,6 +8,7 @@ import About from './views/About.vue'
 import OurHistory from './views/OurHistory'
 import Volunteer from './views/Volunteer'
 import ContactUs from './views/ContactUs'
+import FieldTrip from './views/FieldTrip'
 
 import Members from './views/Admin/components/Members'
 
@@ -75,6 +76,10 @@ export default new Router({
             path: '/contact_us',
             name: 'contactUs',
             component: ContactUs
+        }, {
+            path: '/field_trip',
+            name: 'fieldTrip',
+            component: FieldTrip
         }
     ]
 })

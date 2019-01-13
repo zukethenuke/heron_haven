@@ -73,12 +73,12 @@ export default {
             DrawerItems: [
                 { title: 'Home', route: '/' },
                 { title: 'Admin', route: '/admin' },
-                { title: 'Our History', route: '/history'},
+                { title: 'Our History', route: '/history' },
                 { title: 'Sign In', route: '/signin' }
                 // { title: 'Join', route: '/join' }
             ],
             friendsItems: [
-                { title: 'Field Trips', route: '/field_trips' },
+                { title: 'Field Trips', route: '/field_trip' },
                 { title: 'Volunteer Oppertunities', route: '/volunteer' },
                 { title: 'Our Favorite Links', route: '/links' },
                 { title: '2nd Saturday Programs', route: '/programs/2nd_saturday' },

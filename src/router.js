@@ -10,8 +10,6 @@ import Volunteer from './views/Volunteer'
 import ContactUs from './views/ContactUs'
 import FieldTrip from './views/FieldTrip'
 
-import Members from './views/Admin/components/Members'
-
 // import store from './store/store'
 
 Vue.use(Router)
@@ -53,7 +51,15 @@ export default new Router({
                 {
                     path: 'members',
                     name: 'members',
-                    component: Members
+                    component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/Members')
+                }, {
+                    path: 'messages',
+                    name: 'messages',
+                    component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/Messages')
+                }, {
+                    path: 'field_trip_requests',
+                    name: 'fieldTripRequests',
+                    component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/FieldTripRequests')
                 }
             ]
             // beforeEnter: (to, from, next) => {

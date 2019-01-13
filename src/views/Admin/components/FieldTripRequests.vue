@@ -1,12 +1,12 @@
 <template>
     <div>
-        Members
+        Field Trip Requets
     </div>
 </template>
 
 <script>
 export default {
-    name: 'members'
+    name: 'fieldTripRequests'
 }
 </script>
 

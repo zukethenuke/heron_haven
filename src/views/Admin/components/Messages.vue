@@ -1,12 +1,17 @@
 <template>
     <div>
-        Messages
+        <message-list></message-list>
     </div>
 </template>
 
 <script>
+import MessageList from './MessageList'
+
 export default {
-    name: 'messages'
+    name: 'messages',
+    components: {
+        MessageList
+    }
 }
 </script>
 

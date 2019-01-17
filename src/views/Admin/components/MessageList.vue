@@ -28,14 +28,14 @@
                             <v-list-tile-action>
                                 <v-list-tile-action-text>{{ formatDate(message.createdAt) }}</v-list-tile-action-text>
                                 <v-icon
-                                    v-if="!message.flagged"
-                                    @click="message.flagged = 1"
+                                    v-if="!message.stared"
+                                    @click="message.stared = 1"
                                     color="grey lighten-1">star_border
                                 </v-icon>
 
                                 <v-icon
                                     v-else
-                                    @click="message.flagged = 0"
+                                    @click="message.stared = 0"
                                     color="yellow darken-2">star
                                 </v-icon>
                             </v-list-tile-action>
@@ -74,7 +74,7 @@ export default {
             return new Date(timeStamp).toDateString()
         },
         toggleStar: function(message) {
-            message.flagged = !message.flagged
+            message.stared = !message.stared
         }
     }
 }

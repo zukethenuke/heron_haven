@@ -65,6 +65,7 @@ export default {
     },
     methods: {
         send() {
+            this.form.flagged = true;
             console.log('submitting', this.form);
             ContactUsService.submit(this.form);
         }

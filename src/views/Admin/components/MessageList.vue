@@ -1,8 +1,8 @@
 <template>
     <v-layout row>
-        <v-flex xs8 md12>
-            <v-card>
-                <v-toolbar color="pink" dark>
+        <v-flex>
+            <v-card class="card">
+                <v-toolbar color="brown lighten-3" dark>
                     <v-toolbar-side-icon></v-toolbar-side-icon>
                     <v-toolbar-title>Inbox</v-toolbar-title>
                     <v-spacer></v-spacer>
@@ -12,7 +12,7 @@
                 </v-toolbar>
 
                 <v-list two-line>
-                    <template v-for="message in messages">
+                    <template v-for="(message, index) in messages">
                         <v-list-tile
                             :key="message.id"
                             ripple
@@ -22,8 +22,31 @@
                                 <v-list-tile-sub-title class="text--primary">
                                     {{ message.email }}
                                 </v-list-tile-sub-title>
+                                <v-list-tile-sub-title>{{ message.message }}</v-list-tile-sub-title>
                             </v-list-tile-content>
+
+                            <v-list-tile-action>
+                                <v-list-tile-action-text>{{ formatDate(message.createdAt) }}</v-list-tile-action-text>
+                                <v-icon
+                                    v-if="!message.flagged"
+                                    @click="message.flagged = 1"
+                                    color="grey lighten-1">star_border
+                                </v-icon>
+
+                                <v-icon
+                                    v-else
+                                    @click="message.flagged = 0"
+                                    color="yellow darken-2">star
+                                </v-icon>
+                            </v-list-tile-action>
+
                         </v-list-tile>
+
+                        <v-divider
+                            v-if="index + 1 < messages.length"
+                            :key="message.createdAt">
+                        </v-divider>
+
                     </template>
                 </v-list>
             </v-card>
@@ -46,11 +69,20 @@ export default {
     methods: {
         viewMessage(message) {
             console.log('message', message)
+        },
+        formatDate: function(timeStamp) {
+            return new Date(timeStamp).toDateString()
+        },
+        toggleStar: function(message) {
+            message.flagged = !message.flagged
         }
     }
 }
 </script>
 
 <style scoped>
-
+.card {
+    width: 400px;
+    margin: 20px;
+}
 </style>

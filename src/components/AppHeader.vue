@@ -25,7 +25,7 @@
             <v-menu class="hidden-sm-and-down" open-on-hover nudge-bottom="38">
                 <v-btn
                     slot="activator"
-                    color="brown lighten-3"
+                    color="brown"
                     dark>Friends of Heron Haven
                 </v-btn>
                 <v-list>

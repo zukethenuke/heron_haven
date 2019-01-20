@@ -1,9 +1,9 @@
 <template>
-    <v-layout row>
+    <div>
         <v-flex>
             <v-card class="card">
                 <v-toolbar color="brown lighten-3" dark>
-                    <v-toolbar-side-icon></v-toolbar-side-icon>
+                    <v-icon>email</v-icon>
                     <v-toolbar-title>Inbox</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-btn icon>
@@ -29,13 +29,11 @@
                                 <v-list-tile-action-text>{{ formatDate(message.createdAt) }}</v-list-tile-action-text>
                                 <v-icon
                                     v-if="!message.stared"
-                                    @click="message.stared = 1"
                                     color="grey lighten-1">star_border
                                 </v-icon>
 
                                 <v-icon
                                     v-else
-                                    @click="message.stared = 0"
                                     color="yellow darken-2">star
                                 </v-icon>
                             </v-list-tile-action>
@@ -51,16 +49,18 @@
                 </v-list>
             </v-card>
         </v-flex>
-    </v-layout>
+    </div>
 </template>
 
 <script>
 import ContactUsService from '@/services/ContactUsService';
+import store from '@/store/store'
 
 export default {
     data() {
         return {
-            messages: null
+            messages: null,
+            selectedMessage: null
         }
     },
     async mounted() {
@@ -68,13 +68,10 @@ export default {
     },
     methods: {
         viewMessage(message) {
-            console.log('message', message)
+            store.dispatch('setSelectedMessage', message)
         },
         formatDate: function(timeStamp) {
             return new Date(timeStamp).toDateString()
-        },
-        toggleStar: function(message) {
-            message.stared = !message.stared
         }
     }
 }
@@ -82,7 +79,7 @@ export default {
 
 <style scoped>
 .card {
-    width: 400px;
+    width: 30vw;
     margin: 20px;
 }
 </style>

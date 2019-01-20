@@ -1,6 +1,6 @@
 <template>
     <div class="admin-container">
-        <v-navigation-drawer class="brown lighten-2" dark permanent stateless height="100vh">
+        <v-navigation-drawer class="drawer brown lighten-2" dark permanent stateless height="100vh">
             <v-list>
                 <v-list-tile to="/admin/members">
                     <v-list-tile-content>
@@ -42,5 +42,7 @@ export default {
 .admin-container {
     display: flex;
 }
-
+.drawer {
+    min-width: 100px;
+}
 </style>

@@ -8,7 +8,8 @@ export default new Vuex.Store({
     state: {
         token: null,
         user: null,
-        isUserLoggedIn: false
+        isUserLoggedIn: false,
+        selectedMessage: null
     },
     mutations: {
         setToken(state, token) {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
         },
         setBaseURL(state, url) {
             state.baseURL = url
+        },
+        setSelectedMessage(state, message) {
+            state.selectedMessage = message
         }
     },
     actions: {
@@ -37,6 +41,9 @@ export default new Vuex.Store({
         },
         setBaseURL({ commit }, url) {
             commit('setBaseURL', url)
+        },
+        setSelectedMessage({ commit }, message) {
+            commit('setSelectedMessage', message)
         }
     }
 })

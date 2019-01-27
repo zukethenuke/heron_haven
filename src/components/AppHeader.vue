@@ -3,7 +3,7 @@
 <!-- ---------- -->
         <v-navigation-drawer app v-model="drawer" class="brown lighten-2" dark disable-resize-watcher>
             <v-list>
-                <v-list-tile>
+                <v-list-tile to="/">
                     <v-list-tile-action>
                         <v-icon>home</v-icon>
                     </v-list-tile-action>
@@ -35,6 +35,12 @@
                         <v-list-tile-title><v-icon class="title-icon-drawer">{{ item.icon }}</v-icon>{{item.title}}</v-list-tile-title>
                     </v-list-tile>
                 </v-list-group>
+                 <v-list-tile to="/admin">
+                     <v-list-tile-action>
+                        <v-icon>settings</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-title>Admin</v-list-tile-title>
+                </v-list-tile>
             </v-list>
         </v-navigation-drawer>
  <!-- ---------- -->
@@ -52,7 +58,7 @@
                 <v-btn
                     slot="activator"
                     color="brown"
-                    dark>Friends of Heron Haven
+                    dark> <v-icon class="title-icon-header">nature_people</v-icon> Friends of Heron Haven
                 </v-btn>
                 <v-list>
                     <v-list-tile
@@ -67,8 +73,8 @@
             <v-menu class="hidden-sm-and-down" open-on-hover nudge-bottom="38">
                 <v-btn
                     slot="activator"
-                    color="brown lighten-3"
-                    dark>About Us
+                    color="brown"
+                    dark> <v-icon class="title-icon-header">info</v-icon> About Us
                 </v-btn>
                 <v-list>
                     <v-list-tile
@@ -82,7 +88,7 @@
             <v-spacer class="hidden-sm-and-down"></v-spacer>
             <v-btn v-if="!$store.state.isUserLoggedIn" class="hidden-sm-and-down" to="/admin"><v-icon>settings</v-icon> Admin</v-btn>
             <v-btn v-if="$store.state.isUserLoggedIn" flat class="hidden-sm-and-down" @click="signOut">Sign Out</v-btn>
-            <v-btn v-if="!$store.state.isUserLoggedIn" flat class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
+            <v-btn v-if="!$store.state.isUserLoggedIn" color="brown" class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
             <!-- <v-btn v-if="!$store.state.isUserLoggedIn" color="brown lighten-3" class="hidden-sm-and-down" to="/join">Sign Up</v-btn> -->
         </v-toolbar>
  <!-- ---------- -->
@@ -130,6 +136,6 @@ a {
     margin: 0 25px;
 }
 .title-icon-header {
-    margin-right: 25px;
+    margin-right: 20px;
 }
 </style>

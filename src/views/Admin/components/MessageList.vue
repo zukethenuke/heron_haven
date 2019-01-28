@@ -16,7 +16,6 @@
                         <v-list-tile
                             :key="message.id"
                             ripple
-                            class="helloo"
                             :class="{ selected: message === selectedMessage }"
                             @click="viewMessage(message)">
                             <v-list-tile-content>

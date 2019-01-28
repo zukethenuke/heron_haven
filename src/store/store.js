@@ -27,6 +27,9 @@ export default new Vuex.Store({
         },
         setSelectedMessage(state, message) {
             state.selectedMessage = message
+        },
+        toggleMessageStar(state) {
+            state.selectedMessage.stared = !state.selectedMessage.stared
         }
     },
     actions: {
@@ -44,6 +47,9 @@ export default new Vuex.Store({
         },
         setSelectedMessage({ commit }, message) {
             commit('setSelectedMessage', message)
+        },
+        toggleMessageStar({ commit }) {
+            commit('toggleMessageStar')
         }
     }
 })

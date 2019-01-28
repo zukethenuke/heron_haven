@@ -16,6 +16,8 @@
                         <v-list-tile
                             :key="message.id"
                             ripple
+                            class="helloo"
+                            :class="{ selected: message === selectedMessage }"
                             @click="viewMessage(message)">
                             <v-list-tile-content>
                                 <v-list-tile-title>{{ message.firstName }} {{ message.lastName }}</v-list-tile-title>
@@ -68,6 +70,8 @@ export default {
     },
     methods: {
         viewMessage(message) {
+            this.selectedMessage = message
+            setMessageStyle(message, this.messages)
             store.dispatch('setSelectedMessage', message)
         },
         formatDate: function(timeStamp) {
@@ -75,11 +79,20 @@ export default {
         }
     }
 }
+
+function setMessageStyle(message, messages) {
+    messages.forEach(m => { delete m.selected })
+    return message.selected = true
+}
 </script>
 
 <style scoped>
 .card {
     width: 30vw;
     margin: 20px;
+}
+
+.selected {
+    background: rgb(235, 235, 235);
 }
 </style>

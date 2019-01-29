@@ -47,6 +47,7 @@
                     <v-textarea
                         label="Heron Haven's Notes"
                         auto-grow
+                        :value="selectedMessage.notes"
                         @input="debounceInput"
                     ></v-textarea>
                 </v-card-title>
@@ -57,6 +58,7 @@
 
 <script>
 import store from '@/store/store'
+import ContactUsService from '@/services/ContactUsService';
 const debounce = require('debounce')
 
 export default {
@@ -72,8 +74,11 @@ export default {
         toggleStar() {
             return store.dispatch('toggleMessageStar')
         },
-        debounceInput: debounce(note => {
-            console.log('debounce', note)
+        debounceInput: debounce(function debounce(notes) {
+            console.log('debounce', notes)
+            console.log('id', this.selectedMessage.id)
+            let id = this.selectedMessage.id
+            ContactUsService.update(id, { notes })
         }, 500)
     }
     

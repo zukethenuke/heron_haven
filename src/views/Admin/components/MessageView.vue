@@ -72,16 +72,19 @@ export default {
             return new Date(date).toDateString()
         },
         toggleStar() {
+            let stared = !this.selectedMessage.stared
+            updateMessage(this.selectedMessage, { stared })
             return store.dispatch('toggleMessageStar')
         },
         debounceInput: debounce(function debounce(notes) {
-            console.log('debounce', notes)
-            console.log('id', this.selectedMessage.id)
             let id = this.selectedMessage.id
-            ContactUsService.update(id, { notes })
-        }, 500)
+            updateMessage(this.selectedMessage, { notes })
+        }, 1000)
     }
-    
+}
+
+function updateMessage(message, data) {
+    return ContactUsService.update(message.id, data)
 }
 </script>
 

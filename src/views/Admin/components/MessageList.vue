@@ -28,6 +28,7 @@
 
                             <v-list-tile-action>
                                 <v-list-tile-action-text>{{ formatDate(message.createdAt) }}</v-list-tile-action-text>
+                                <div><v-icon class="header-icon">info</v-icon> {{ message.type }}</div>
                                 <v-icon
                                     v-if="!message.stared"
                                     color="grey lighten-1">star_border

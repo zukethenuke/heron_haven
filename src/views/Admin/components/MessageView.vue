@@ -100,7 +100,6 @@ function updateMessage(message, data, context) {
     context.savingMessage = true;
     return ContactUsService.update(message.id, data)
         .then((res) => {
-            console.log('res', res)
             store.dispatch('updateMessageNotes', res.data.notes)
             setTimeout(() => {
                 context.savingMessage = false;

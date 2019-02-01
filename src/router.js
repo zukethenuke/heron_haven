@@ -8,7 +8,7 @@ import About from './views/About.vue'
 import OurHistory from './views/OurHistory'
 import Volunteer from './views/Volunteer'
 import ContactUs from './views/ContactUs'
-import FieldTrip from './views/FieldTrip'
+import FieldTrip from './views/FieldTrip/FieldTrip'
 
 // import store from './store/store'
 

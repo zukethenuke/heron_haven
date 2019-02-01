@@ -23,16 +23,19 @@
                                 </div>
                                 <div>
                                     <v-icon
+                                        class="right"
                                         v-if="!selectedMessage.stared"
                                         @click="toggleStar"
                                         color="grey lighten-1">star_border
                                     </v-icon>
 
                                     <v-icon
+                                        class="right"
                                         v-else
                                         @click="toggleStar"
                                         color="yellow darken-2">star
                                     </v-icon>
+                                    <v-list-tile-title></v-list-tile-title>
                                     <v-list-tile-title><v-icon class="header-icon">info</v-icon> {{ selectedMessage.type }}</v-list-tile-title>
                                 </div>
                             </div>
@@ -45,6 +48,8 @@
                 <v-divider></v-divider>
                 <v-card-title>
                     <v-textarea
+                        loading="true"
+                        :append-icon="savingIcon"
                         label="Heron Haven's Notes"
                         auto-grow
                         :value="selectedMessage.notes"
@@ -65,6 +70,14 @@ export default {
     computed: {
         selectedMessage() {
             return store.state.selectedMessage
+        },
+        savingIcon() {
+            return this.savingMessage ? 'backup' : '';
+        }
+    },
+    data() {
+        return {
+            savingMessage: false
         }
     },
     methods: {
@@ -78,13 +91,21 @@ export default {
         },
         debounceInput: debounce(function debounce(notes) {
             let id = this.selectedMessage.id
-            updateMessage(this.selectedMessage, { notes })
+            updateMessage(this.selectedMessage, { notes }, this)
         }, 1000)
     }
 }
 
-function updateMessage(message, data) {
+function updateMessage(message, data, context) {
+    context.savingMessage = true;
     return ContactUsService.update(message.id, data)
+        .then((res) => {
+            console.log('res', res)
+            store.dispatch('updateMessageNotes', res.data.notes)
+            setTimeout(() => {
+                context.savingMessage = false;
+            }, 2000);
+        })
 }
 </script>
 
@@ -100,5 +121,10 @@ function updateMessage(message, data) {
     display: flex;
     width: 100%;
     justify-content: space-between;
+}
+.right {
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    float: right;
 }
 </style>

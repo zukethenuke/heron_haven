@@ -5,28 +5,28 @@
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
              <v-text-field
-                type="form.firstName"
+                type="text"
                 v-model="form.firstName"
                 label="First Name"
                 data-vv-name="firstName"
                 required
             ></v-text-field>
              <v-text-field
-                type="form.lastName"
+                type="text"
                 v-model="form.lastName"
                 label="Last Name"
                 data-vv-name="lastName"
                 required
             ></v-text-field>
             <v-text-field
-                type="form.email"
+                type="email"
                 v-model="form.email"
                 label="E-mail"
                 data-vv-name="email"
                 required
             ></v-text-field>
             <v-text-field
-                type="form.phoneNumber"
+                type="text"
                 v-model="form.phoneNumber"
                 label="Phone Number"
                 data-vv-name="phoneNumber"
@@ -65,8 +65,6 @@ export default {
     },
     methods: {
         send() {
-            this.form.flagged = true;
-            console.log('submitting', this.form);
             ContactUsService.submit(this.form);
         }
     }

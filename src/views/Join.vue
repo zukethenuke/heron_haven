@@ -42,14 +42,16 @@ export default {
     methods: {
         async register () {
             try {
-                await AuthenticationService.register({
+                let response = await AuthenticationService.register({
                     email: this.email,
                     password: this.password
                 })
                 this.$store.dispatch('setToken', response.data.token)
                 this.$store.dispatch('setUser', response.data.user)
+                this.$router.push('/')
             } catch (error) {
                 this.error = error.response.data.error
+                this.$store.dispatch('logOut')
             }
         }
     }

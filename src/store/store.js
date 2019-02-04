@@ -33,14 +33,21 @@ export default new Vuex.Store({
         },
         updateMessageNotes(state, notes) {
             state.selectedMessage.notes = notes
+        },
+        logOut(state) {
+            state.token = null
+            state.isUserLoggedIn = false
+            state.user = null
         }
     },
     actions: {
         setToken({ commit }, token) {
             commit('setToken', token) // call the mutation called setToken and pass it token
+            localStorage.setItem('userToken', token)
         },
         setUser({ commit }, user) {
             commit('setUser', user)
+            localStorage.setItem('user', user)
         },
         setAppEnv({ commit }, env) {
             commit('setAppEnv', env)
@@ -56,6 +63,11 @@ export default new Vuex.Store({
         },
         updateMessageNotes({ commit }, notes) {
             commit('updateMessageNotes', notes)
+        },
+        logOut({ commit }) {
+            localStorage.removeItem('userToken')
+            localStorage.removeItem('user')
+            commit('logOut')
         }
     }
 })

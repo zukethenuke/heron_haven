@@ -49,9 +49,11 @@ export default {
                 this.error = null
                 this.$store.dispatch('setToken', response.data.token)
                 this.$store.dispatch('setUser', response.data.user)
-
+                this.$router.push('/')
             } catch (error) {
                 this.error = error.response.data.error
+                this.$store.dispatch('logOut')
+
             }
         }
     }

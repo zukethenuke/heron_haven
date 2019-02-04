@@ -35,11 +35,29 @@
                         <v-list-tile-title><v-icon class="title-icon-drawer">{{ item.icon }}</v-icon>{{item.title}}</v-list-tile-title>
                     </v-list-tile>
                 </v-list-group>
-                 <v-list-tile to="/admin">
+                 <v-list-tile v-if="$store.state.isUserLoggedIn" to="/admin/messages">
                      <v-list-tile-action>
                         <v-icon>settings</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-title>Admin</v-list-tile-title>
+                </v-list-tile>
+                 <v-list-tile v-if="$store.state.isUserLoggedIn" @click="signOut">
+                     <v-list-tile-action>
+                        <v-icon>settings</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-title>Sign Out</v-list-tile-title>
+                </v-list-tile>
+                 <v-list-tile v-if="!$store.state.isUserLoggedIn" to="/signin">
+                     <v-list-tile-action>
+                        <v-icon>settings</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-title>Sign In</v-list-tile-title>
+                </v-list-tile>
+                 <v-list-tile v-if="!$store.state.isUserLoggedIn" to="/join">
+                     <v-list-tile-action>
+                        <v-icon>settings</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-title>Sign Up</v-list-tile-title>
                 </v-list-tile>
             </v-list>
         </v-navigation-drawer>
@@ -86,10 +104,10 @@
                 </v-list>
             </v-menu>
             <v-spacer class="hidden-sm-and-down"></v-spacer>
-            <v-btn v-if="!$store.state.isUserLoggedIn" class="hidden-sm-and-down" to="/admin"><v-icon>settings</v-icon> Admin</v-btn>
+            <v-btn v-if="$store.state.isUserLoggedIn" class="hidden-sm-and-down" to="/admin/messages"><v-icon>settings</v-icon> Admin</v-btn>
             <v-btn v-if="$store.state.isUserLoggedIn" flat class="hidden-sm-and-down" @click="signOut">Sign Out</v-btn>
             <v-btn v-if="!$store.state.isUserLoggedIn" color="brown" class="hidden-sm-and-down" to="/signin">Sign In</v-btn>
-            <!-- <v-btn v-if="!$store.state.isUserLoggedIn" color="brown lighten-3" class="hidden-sm-and-down" to="/join">Sign Up</v-btn> -->
+            <v-btn v-if="!$store.state.isUserLoggedIn" color="brown lighten-3" class="hidden-sm-and-down" to="/join">Sign Up</v-btn>
         </v-toolbar>
  <!-- ---------- -->
     </span>
@@ -118,8 +136,7 @@ export default {
     },
     methods: {
         signOut: function() {
-            this.$store.dispatch('setToken', null)
-            this.$store.dispatch('setUser', null)
+            this.$store.dispatch('logOut', null)
             this.$router.push({ name: 'home' })
         }
     }

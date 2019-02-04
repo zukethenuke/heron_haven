@@ -10,7 +10,7 @@ import Volunteer from './views/Volunteer'
 import ContactUs from './views/ContactUs'
 import FieldTrip from './views/FieldTrip/FieldTrip'
 
-// import store from './store/store'
+import store from './store/store'
 
 Vue.use(Router)
 
@@ -61,14 +61,14 @@ export default new Router({
                     name: 'fieldTripRequests',
                     component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/FieldTripRequests')
                 }
-            ]
-            // beforeEnter: (to, from, next) => {
-            //     if (store.state.isUserLoggedIn) {
-            //         next()
-            //     } else {
-            //         next('/')
-            //     }
-            // }
+            ],
+            beforeEnter: (to, from, next) => {
+                if (store.state.isUserLoggedIn) {
+                    next()
+                } else {
+                    next('/')
+                }
+            }
         },
         {
             path: '/history',

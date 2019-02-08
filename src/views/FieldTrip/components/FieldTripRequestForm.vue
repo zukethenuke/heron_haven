@@ -122,7 +122,7 @@
                     prepend-icon="message"
                     required
                 ></v-text-field>
-                <v-btn>Submit</v-btn>
+                <v-btn class="brown lighten-2" dark @click="submit">Send</v-btn>
                 <v-divider></v-divider>
                 <br>
                 <p>
@@ -135,14 +135,46 @@
                 </p>
             </v-flex>
         </v-layout>
+         <v-snackbar
+            v-model="snackbar.active"
+            :color="snackbar.color"
+            :timeout="snackbar.timeout"
+            :top="true"
+        >{{ snackbar.text }}</v-snackbar>
     </v-container>
 </template>
 
 <script>
+import FieldTripRequestService from '@/services/FieldTripRequestService'
 export default {
     data() {
         return {
-            form: {}
+            form: {},
+            snackbar: {
+                active: false,
+                color: '',
+                timeout: 6000,
+                text: ''
+            }
+        }
+    },
+    methods: {
+        async submit() {
+            try {
+                let response = await FieldTripRequestService.submit(this.form)
+                this.form = {}
+                this.snackbar.text = `Thank you!  Message successfully sent.`
+                this.snackbar.color = 'success'
+                this.snackbar.active = true
+            } catch(error) {
+                console.log('error', error)
+                this.error = error.response.data.error
+                this.error = error.response.data.error
+                this.snackbar.text = 'Error sending message!  Please call us.'
+                this.snackbar.color = 'error'
+                this.snackbar.active = true
+                throw new Error(error)
+            }
         }
     }
 }

@@ -45,8 +45,14 @@
             ></v-textarea>
             <div class="error" v-html="error"></div>
             <br>
-            <v-btn class="brown lighten-2" dark @click="send">Send</v-btn>
+            <v-btn class="brown lighten-2" dark @click="submit">Send</v-btn>
         </div>
+        <v-snackbar
+            v-model="snackbar.active"
+            :color="snackbar.color"
+            :timeout="snackbar.timeout"
+            :top="true"
+        >{{ snackbar.text }}</v-snackbar>
     </div>
 </template>
 
@@ -58,14 +64,31 @@ export default {
     data() {
         return {
             error: '',
-            form: {
-                type: this.contactFormData.type
+            form: { type: this.contactFormData.type },
+            snackbar: {
+                active: false,
+                color: '',
+                timeout: 6000,
+                text: ''
             }
         }
     },
     methods: {
-        send() {
-            ContactUsService.submit(this.form);
+        async submit() {
+            try{
+                let response = await ContactUsService.submit(this.form);
+                this.form = { type: this.contactFormData.type }
+                this.snackbar.text = `Thank you!  Message successfully sent.`
+                this.snackbar.color = 'success'
+                this.snackbar.active = true
+
+            } catch(error) {
+                this.error = error.response.data.error
+                this.snackbar.text = 'Error sending message!  Please call us.'
+                this.snackbar.color = 'error'
+                this.snackbar.active = true
+                throw new Error(error)
+            }
         }
     }
 }

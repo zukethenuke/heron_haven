@@ -11,19 +11,25 @@
                     </v-btn>
                 </v-toolbar>
 
-                <v-list two-line>
+                <v-list three-line>
                     <template v-for="(message, index) in messages">
                         <v-list-tile
                             :key="message.id"
                             ripple
-                            :class="{ selected: message === selectedMessage }"
+                            :class="{ selected: message.id === selectedMessage.id }"
                             @click="viewMessage(message)">
                             <v-list-tile-content>
-                                <v-list-tile-title>{{ message.firstName }} {{ message.lastName }}</v-list-tile-title>
+                                <v-list-tile-title>
+                                    <v-icon>person</v-icon>
+                                    {{ message.firstName }} {{ message.lastName }}
+                                </v-list-tile-title>
                                 <v-list-tile-sub-title class="text--primary">
+                                    <v-icon>email</v-icon>
                                     {{ message.email }}
                                 </v-list-tile-sub-title>
-                                <v-list-tile-sub-title>{{ message.message }}</v-list-tile-sub-title>
+                                <v-list-tile-sub-title class="message">
+                                    {{ message.message }}
+                                </v-list-tile-sub-title>
                             </v-list-tile-content>
 
                             <v-list-tile-action>
@@ -62,7 +68,7 @@ export default {
     data() {
         return {
             messages: null,
-            selectedMessage: null
+            selectedMessage: store.state.selectedMessage || { id: -1 }
         }
     },
     async mounted() {
@@ -71,18 +77,12 @@ export default {
     methods: {
         viewMessage(message) {
             this.selectedMessage = message
-            setMessageStyle(message, this.messages)
             store.dispatch('setSelectedMessage', message)
         },
         formatDate: function(timeStamp) {
             return new Date(timeStamp).toDateString()
         }
     }
-}
-
-function setMessageStyle(message, messages) {
-    messages.forEach(m => { delete m.selected })
-    return message.selected = true
 }
 </script>
 
@@ -93,6 +93,10 @@ function setMessageStyle(message, messages) {
 }
 
 .selected {
-    background: rgb(235, 235, 235);
+    background: rgb(220, 220, 220);
+}
+
+.message {
+    height: 20px;
 }
 </style>

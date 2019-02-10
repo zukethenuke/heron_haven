@@ -10,20 +10,38 @@
                 </v-btn>
             </v-toolbar>
 
-            <v-list two-line>
+            <v-list three-line>
                 <template v-for="(request, index) in requests">
                     <v-list-tile
                         :key="request.id"
                         ripple
-                        :class="{ selected: request === selectedRequest }"
+                        :class="{ selected: request.id === selectedRequest.id }"
                         @click="viewRequest(request)">
                             <v-list-tile-content>
-                                <v-list-tile-title>{{ request.groupName }}</v-list-tile-title>
+                                <v-list-tile-title><v-icon class="title-icon">group</v-icon>{{ request.groupName }}</v-list-tile-title>
                                 <v-list-tile-sub-title class="test--primary">
+                                    <v-icon>person</v-icon>
                                     {{ request.personInCharge }}
                                 </v-list-tile-sub-title>
-                                <v-list-tile-sub-title>{{ request.email }}</v-list-tile-sub-title>
+                                <v-list-tile-sub-title>
+                                    <v-icon>today</v-icon>
+                                    {{ formatDate(request.dateOfVisit) }}
+                                </v-list-tile-sub-title>
                             </v-list-tile-content>
+
+                            <v-list-tile-action>
+                                <v-list-tile-action-text>{{ formatDate(request.createdAt) }}</v-list-tile-action-text>
+                                <div></div>
+                                <v-icon
+                                    v-if="!request.stared"
+                                    color="grey lighten-1">star_border
+                                </v-icon>
+
+                                <v-icon
+                                    v-else
+                                    color="yellow darken-2">star
+                                </v-icon>
+                            </v-list-tile-action>
                     </v-list-tile>
 
                     <v-divider
@@ -44,7 +62,7 @@ export default {
     data() {
         return {
             requests: null,
-            selectedRequest: null
+            selectedRequest: store.state.selectedFieldTripRequest || { id: -1 }
         }
     },
     async mounted() {
@@ -52,19 +70,29 @@ export default {
     },
     methods: {
         viewRequest(request) {
-            console.log(request)
+            this.selectedRequest = request
+            store.dispatch('setSelectedFieldTripRequest', request)
         },
         formatDate: function(timeStamp) {
             return new Date(timeStamp).toDateString()
         }
     }
 }
+
 </script>
 
 <style scoped>
 .card {
     width: 30vw;
     margin: 20px;
+}
+
+.title-icon {
+    margin-right: 10px;
+}
+
+.selected {
+    background: rgb(220, 220, 220);
 }
 
 </style>

@@ -9,7 +9,8 @@ export default new Vuex.Store({
         token: null,
         user: null,
         isUserLoggedIn: false,
-        selectedMessage: null
+        selectedMessage: null,
+        selectedFieldTripRequest: null
     },
     mutations: {
         setToken(state, token) {
@@ -31,8 +32,20 @@ export default new Vuex.Store({
         toggleMessageStar(state) {
             state.selectedMessage.stared = !state.selectedMessage.stared
         },
+        toggleMessageArchived(state) {
+            state.selectedMessage.archived = !state.selectedMessage.archived
+        },
         updateMessageNotes(state, notes) {
             state.selectedMessage.notes = notes
+        },
+        setSelectedFieldTripRequest(state, request) {
+            state.selectedFieldTripRequest = request
+        },
+        toggleFieldTripRequestStar(state) {
+            state.selectedFieldTripRequest.stared = !state.selectedFieldTripRequest.stared
+        },
+        updateFieldTripRequestNotes(state, notes) {
+            state.selectedFieldTripRequest.notes = notes
         },
         logOut(state) {
             state.token = null
@@ -61,8 +74,20 @@ export default new Vuex.Store({
         toggleMessageStar({ commit }) {
             commit('toggleMessageStar')
         },
+        toggleMessageArchived({ commit }) {
+            commit('toggleMessageArchived')
+        },
         updateMessageNotes({ commit }, notes) {
             commit('updateMessageNotes', notes)
+        },
+        setSelectedFieldTripRequest({ commit }, request) {
+            commit('setSelectedFieldTripRequest', request)
+        },
+        toggleFieldTripRequestStar({ commit }) {
+            commit('toggleFieldTripRequestStar')
+        },
+        updateFieldTripRequestNotes({ commit }, notes) {
+            commit('updateFieldTripRequestNotes', notes)
         },
         logOut({ commit }) {
             localStorage.removeItem('userToken')

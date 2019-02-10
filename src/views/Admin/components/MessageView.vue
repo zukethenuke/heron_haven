@@ -6,11 +6,45 @@
                     <v-icon>comment</v-icon>
                 </v-toolbar>
             </v-card>
+
             <v-card class="card" v-if="selectedMessage">
                 <v-toolbar color="brown lighten-3" dark>
                     <v-icon>comment</v-icon>
                     <v-toolbar-title>{{ selectedMessage.firstName }} {{  selectedMessage.lastName }}</v-toolbar-title>
                     <v-spacer></v-spacer>
+                    <div class="buttons">
+                        <v-icon
+                            class="right"
+                            v-if="!selectedMessage.stared"
+                            @click="toggleStar"
+                            color="white">star
+                        </v-icon>
+
+                        <v-icon
+                            class="right"
+                            v-else
+                            @click="toggleStar"
+                            color="yellow darken-2">star
+                        </v-icon>
+                        <v-tooltip v-if="!selectedMessage.archived" bottom>
+                            <v-icon
+                                slot="activator"
+                                class="right"
+                                @click="toggleArchived"
+                            >archive
+                            </v-icon>
+                            <span>Archive Message</span>
+                        </v-tooltip>
+                        <v-tooltip v-if="selectedMessage.archived" bottom>
+                            <v-icon
+                                slot="activator"
+                                class="right"
+                                @click="toggleArchived"
+                            >unarchive
+                            </v-icon>
+                            <span>Return message to Inbox</span>
+                        </v-tooltip>
+                    </div>
                 </v-toolbar>
                 <v-list three-line>
                     <v-list-tile>
@@ -19,24 +53,17 @@
                                 <div>
                                     <v-list-tile-title><v-icon class="header-icon">email</v-icon> {{ selectedMessage.email }}</v-list-tile-title>
                                     <v-list-tile-title><v-icon class="header-icon">person</v-icon> {{ selectedMessage.firstName }} {{  selectedMessage.lastName }}</v-list-tile-title>
-                                    <v-list-tile-title><v-icon class="header-icon">schedule</v-icon> {{ formatedDate(selectedMessage.createdAt) }}</v-list-tile-title>
+                                    <v-list-tile-title v-if="selectedMessage.selectedOption"><v-icon class="header-icon">work</v-icon> {{ selectedMessage.selectedOption }}</v-list-tile-title>
                                 </div>
                                 <div>
-                                    <v-icon
-                                        class="right"
-                                        v-if="!selectedMessage.stared"
-                                        @click="toggleStar"
-                                        color="grey lighten-1">star_border
-                                    </v-icon>
-
-                                    <v-icon
-                                        class="right"
-                                        v-else
-                                        @click="toggleStar"
-                                        color="yellow darken-2">star
-                                    </v-icon>
-                                    <v-list-tile-title></v-list-tile-title>
-                                    <v-list-tile-title><v-icon class="header-icon">info</v-icon> {{ selectedMessage.type }}</v-list-tile-title>
+                                    <v-list-tile-title>
+                                        <span class="right">
+                                            {{ formatedDate(selectedMessage.createdAt) }}
+                                            <v-icon class="m-left">call_received</v-icon>
+                                        </span>
+                                    </v-list-tile-title>
+                                    <v-list-tile-title><span class="right"> {{ selectedMessage.type }} <v-icon class="m-left">info</v-icon></span></v-list-tile-title>
+                                  
                                 </div>
                             </div>
                         </v-list-tile-content>
@@ -49,6 +76,7 @@
                 <v-card-title>
                     <v-textarea
                         loading="true"
+                        prepend-icon="assignment"
                         :append-icon="savingIcon"
                         label="Heron Haven's Notes"
                         auto-grow
@@ -72,7 +100,7 @@ export default {
             return store.state.selectedMessage
         },
         savingIcon() {
-            return this.savingMessage ? 'backup' : '';
+            return this.savingMessage ? 'backup' : ''
         }
     },
     data() {
@@ -88,6 +116,11 @@ export default {
             let stared = !this.selectedMessage.stared
             updateMessage(this.selectedMessage, { stared })
             return store.dispatch('toggleMessageStar')
+        },
+        toggleArchived() {
+            let archived = !this.selectedMessage.archived
+            updateMessage(this.selectedMessage, { archived })
+            return store.dispatch('toggleMessageArchived')
         },
         debounceInput: debounce(function debounce(notes) {
             let id = this.selectedMessage.id
@@ -122,8 +155,10 @@ function updateMessage(message, data, context) {
     justify-content: space-between;
 }
 .right {
-    /* display: flex; */
-    /* justify-content: flex-end; */
     float: right;
+    margin-left: 10px;
+}
+.m-left {
+    margin-left: 10px;
 }
 </style>

@@ -122,6 +122,13 @@
                     prepend-icon="message"
                     required
                 ></v-text-field>
+                <v-text-field
+                    type="text"
+                    label="Any additional information or questions?"
+                    v-model="form.additionalInfo"
+                    prepend-icon="message"
+                    required
+                ></v-text-field>
                 <v-btn class="brown lighten-2" dark @click="submit">Send</v-btn>
                 <v-divider></v-divider>
                 <br>

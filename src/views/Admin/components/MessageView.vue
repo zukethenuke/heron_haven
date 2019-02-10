@@ -44,12 +44,19 @@
                             </v-icon>
                             <span>Return message to Inbox</span>
                         </v-tooltip>
-                        <v-tooltip v-if="!selectedMessage.deleted">
+                        <v-tooltip v-if="!selectedMessage.deleted" bottom>
+                            <v-icon
+                                slot="activator"
+                                @click="toggleDelete"
+                            >delete</v-icon>
                             <span>Delete message</span>
                         </v-tooltip>
-                        <v-tooltip v-if="selectedMessage.deleted">
+                        <v-tooltip v-if="selectedMessage.deleted" bottom>
+                            <v-icon
+                                slot="activator"
+                                @click="toggleDelete"
+                            >delete_forever</v-icon>
                             <span>Return message to Inbox</span>
-
                         </v-tooltip>
                     </div>
                 </v-toolbar>
@@ -123,6 +130,10 @@ export default {
             let stared = !this.selectedMessage.stared
             updateMessage(this.selectedMessage, { stared })
             return store.dispatch('toggleMessageStar')
+        },
+        toggleDelete() {
+            let deleted = !this.selectedMessage.deleted
+            updateMessage(this.selectedMessage, { deleted })
         },
         async toggleArchived() {
             let archived = !this.selectedMessage.archived

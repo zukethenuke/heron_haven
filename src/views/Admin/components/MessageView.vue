@@ -44,6 +44,13 @@
                             </v-icon>
                             <span>Return message to Inbox</span>
                         </v-tooltip>
+                        <v-tooltip v-if="!selectedMessage.deleted">
+                            <span>Delete message</span>
+                        </v-tooltip>
+                        <v-tooltip v-if="selectedMessage.deleted">
+                            <span>Return message to Inbox</span>
+
+                        </v-tooltip>
                     </div>
                 </v-toolbar>
                 <v-list three-line>
@@ -117,10 +124,11 @@ export default {
             updateMessage(this.selectedMessage, { stared })
             return store.dispatch('toggleMessageStar')
         },
-        toggleArchived() {
+        async toggleArchived() {
             let archived = !this.selectedMessage.archived
-            updateMessage(this.selectedMessage, { archived })
+            await updateMessage(this.selectedMessage, { archived })
             return store.dispatch('toggleMessageArchived')
+                .then(clearSelectedMessage())
         },
         debounceInput: debounce(function debounce(notes) {
             let id = this.selectedMessage.id
@@ -138,6 +146,10 @@ function updateMessage(message, data, context) {
                 if (context) context.savingMessage = false;
             }, 2000);
         })
+}
+
+function clearSelectedMessage() {
+    return store.dispatch('setSelectedMessage', null)
 }
 </script>
 

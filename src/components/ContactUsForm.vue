@@ -45,7 +45,9 @@
             ></v-textarea>
             <div class="error" v-html="error"></div>
             <br>
-            <v-btn class="brown lighten-2" dark @click="submit">Send</v-btn>
+            <div class="buttons">
+                <v-btn class="brown lighten-2" ripple dark @click="submit">Send</v-btn>
+            </div>
         </div>
         <v-snackbar
             v-model="snackbar.active"
@@ -97,5 +99,10 @@ export default {
 <style scoped>
 .contact-us {
     margin: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
 }
 </style>

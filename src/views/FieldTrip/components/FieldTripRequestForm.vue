@@ -133,7 +133,9 @@
                     prepend-icon="message"
                     required
                 ></v-textarea>
-                <v-btn class="brown lighten-2" dark @click="submit">Send</v-btn>
+                <div class="buttons">
+                    <v-btn class="brown lighten-2" ripple dark @click="submit">Send</v-btn>
+                </div>
                 <v-divider></v-divider>
                 <br>
                 <p>
@@ -198,6 +200,11 @@ export default {
     font-weight: 600;
     color: rgb(116, 116, 116);
     margin: 0 0 20px 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
 }
 
 </style>

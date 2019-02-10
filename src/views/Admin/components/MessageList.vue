@@ -3,16 +3,21 @@
         <v-flex>
             <v-card class="card">
                 <v-toolbar color="brown lighten-3" dark>
-                    <v-icon>email</v-icon>
-                    <v-toolbar-title>Inbox</v-toolbar-title>
+                    <v-icon class="header-icon">email</v-icon>
+                    <v-flex xs4>
+                        <v-select
+                            :items="mailBoxes"
+                            v-model="selectedMailbox"
+                        ></v-select>
+                    </v-flex>
                     <v-spacer></v-spacer>
-                    <v-btn icon>
+                    <!-- <v-btn icon>
                         <v-icon>search</v-icon>
-                    </v-btn>
+                    </v-btn> -->
                 </v-toolbar>
 
                 <v-list three-line>
-                    <template v-for="(message, index) in messages">
+                    <template v-for="(message, index) in filteredMessages">
                         <v-list-tile
                             :key="message.id"
                             ripple
@@ -67,12 +72,22 @@ import store from '@/store/store'
 export default {
     data() {
         return {
-            messages: null,
-            selectedMessage: store.state.selectedMessage || { id: -1 }
+            messages: [],
+            selectedMessage: store.state.selectedMessage || { id: -1 },
+            mailBoxes: ['Inbox', 'Archive', 'Trash'],
+            selectedMailbox: 'Inbox'
         }
     },
     async mounted() {
         this.messages = await ContactUsService.getAll()
+    },
+    computed: {
+        filteredMessages() {
+            if (this.selectedMailbox === 'Inbox') return this.messages.filter(m => !m.archived && !m.deleted)
+            else if (this.selectedMailbox === 'Archive') return this.messages.filter(m => m.archived)
+            else if (this.selectedMailbox === 'Trash') return this.messages.filter(m => m.deleted)
+            else return messages
+        }
     },
     methods: {
         viewMessage(message) {
@@ -82,7 +97,14 @@ export default {
         formatDate: function(timeStamp) {
             return new Date(timeStamp).toDateString()
         }
+    },
+    watch: {
+        selectedMailbox: () => clearSelectedMessage()
     }
+}
+
+function clearSelectedMessage() {
+    return store.dispatch('setSelectedMessage', null)
 }
 </script>
 
@@ -98,5 +120,8 @@ export default {
 
 .message {
     height: 20px;
+}
+.header-icon {
+    margin-right: 10px;
 }
 </style>

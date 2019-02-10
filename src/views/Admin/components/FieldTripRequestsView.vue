@@ -128,7 +128,6 @@ function updateRequest(request, data, context) {
     if (context) context.savingRequest = true;
     return FieldTripRequestService.update(request.id, data)
         .then(res => {
-            console.log(res)
             store.dispatch('updateFieldTripRequestNotes', res.data.notes)
             setTimeout(() => {
                 if (context) context.savingRequest = false;

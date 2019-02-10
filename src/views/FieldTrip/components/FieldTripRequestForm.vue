@@ -115,20 +115,24 @@
                         ></v-text-field>
                     </v-flex>
                 </v-layout>
-                <v-text-field
+                <v-textarea
                     type="text"
+                    box
+                    auto-grow
                     label="Requested program/ subject / activity or would you prefer a Nature Walk"
                     v-model="form.requestedActivity"
                     prepend-icon="message"
                     required
-                ></v-text-field>
-                <v-text-field
+                ></v-textarea>
+                <v-textarea
                     type="text"
+                    box
+                    auto-grow
                     label="Any additional information or questions?"
                     v-model="form.additionalInfo"
                     prepend-icon="message"
                     required
-                ></v-text-field>
+                ></v-textarea>
                 <v-btn class="brown lighten-2" dark @click="submit">Send</v-btn>
                 <v-divider></v-divider>
                 <br>

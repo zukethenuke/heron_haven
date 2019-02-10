@@ -86,7 +86,7 @@ export default {
             if (this.selectedMailbox === 'Inbox') return this.messages.filter(m => !m.archived && !m.deleted)
             else if (this.selectedMailbox === 'Archive') return this.messages.filter(m => m.archived)
             else if (this.selectedMailbox === 'Trash') return this.messages.filter(m => m.deleted)
-            else return messages
+            else return this.messages
         }
     },
     methods: {

@@ -12,19 +12,55 @@
                     <v-icon>comment</v-icon>
                     <v-toolbar-title>{{ selectedRequest.groupName }}</v-toolbar-title>
                     <v-spacer></v-spacer>
-                     <v-icon
-                        class="right"
-                        v-if="!selectedRequest.stared"
-                        @click="toggleStar"
-                        color="white">star
-                    </v-icon>
+                    <div class="buttons">
+                        <v-icon
+                            class="right"
+                            v-if="!selectedRequest.stared"
+                            @click="toggleStar"
+                            color="white">star
+                        </v-icon>
 
-                    <v-icon
-                        class="right"
-                        v-else
-                        @click="toggleStar"
-                        color="yellow darken-2">star
-                    </v-icon>
+                        <v-icon
+                            class="right"
+                            v-else
+                            @click="toggleStar"
+                            color="yellow darken-2">star
+                        </v-icon>
+
+                        <v-tooltip v-if="!selectedRequest.archived" bottom>
+                            <v-icon
+                                slot="activator"
+                                class="right"
+                                @click="toggleArchived"
+                            >archive
+                            </v-icon>
+                            <span>Archive request</span>
+                        </v-tooltip>
+                        <v-tooltip v-if="selectedRequest.archived" bottom>
+                            <v-icon
+                                slot="activator"
+                                class="right"
+                                @click="toggleArchived"
+                            >unarchive
+                            </v-icon>
+                            <span>Return request to Inbox</span>
+                        </v-tooltip>
+                        <v-tooltip v-if="!selectedRequest.deleted" bottom>
+                            <v-icon
+                                slot="activator"
+                                @click="toggleDelete"
+                            >delete</v-icon>
+                            <span>Delete request</span>
+                        </v-tooltip>
+                        <v-tooltip v-if="selectedRequest.deleted" bottom>
+                            <v-icon
+                                slot="activator"
+                                @click="toggleDelete"
+                            >delete_forever</v-icon>
+                            <span>Return request to Inbox</span>
+                        </v-tooltip>
+                    </div>
+                    
                 </v-toolbar>
                 <v-list three-line>
                     <v-list-tile>
@@ -117,6 +153,20 @@ export default {
             updateRequest(this.selectedRequest, { stared })
             return store.dispatch('toggleFieldTripRequestStar')
         },
+        async toggleDelete() {
+            let deleted = !this.selectedRequest.deleted
+            await updateRequest(this.selectedRequest, { deleted, archived: false })
+            if (this.selectedRequest.archived) store.dispatch('toggleFieldTripRequestArchived') // prevent deleted and archived both
+            return store.dispatch('toggleFieldTripRequestDeleted')
+                .then(clearSelectedRequest())
+        },
+        async toggleArchived() {
+            let archived = !this.selectedRequest.archived
+            await updateRequest(this.selectedRequest, { archived, deleted: false })
+            if (this.selectedRequest.deleted) store.dispatch('toggleFieldTripRequestDeleted') // prevent deleted and archived both
+            return store.dispatch('toggleFieldTripRequestArchived')
+                .then(clearSelectedRequest())
+        },
         debounceInput: debounce(function debounce(notes) {
             let id = this.selectedRequest.id
             updateRequest(this.selectedRequest, { notes }, this)
@@ -135,6 +185,9 @@ function updateRequest(request, data, context) {
         })
 }
 
+function clearSelectedRequest() {
+    return store.dispatch('setSelectedFieldTripRequest', null)
+}
 </script>
 
 <style scoped>
@@ -152,5 +205,6 @@ function updateRequest(request, data, context) {
 }
 .right {
     float: right;
+    margin-left: 10px;
 }
 </style>

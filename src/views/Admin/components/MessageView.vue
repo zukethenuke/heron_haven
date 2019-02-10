@@ -131,13 +131,17 @@ export default {
             updateMessage(this.selectedMessage, { stared })
             return store.dispatch('toggleMessageStar')
         },
-        toggleDelete() {
+        async toggleDelete() {
             let deleted = !this.selectedMessage.deleted
-            updateMessage(this.selectedMessage, { deleted })
+            await updateMessage(this.selectedMessage, { deleted, archived: false })
+            if (this.selectedMessage.archived) store.dispatch('toggleMessageArchived') // prevent deleted and archived both
+            return store.dispatch('toggleMessageDeleted')
+                .then(clearSelectedMessage())
         },
         async toggleArchived() {
             let archived = !this.selectedMessage.archived
-            await updateMessage(this.selectedMessage, { archived })
+            await updateMessage(this.selectedMessage, { archived, deleted: false })
+            if (this.selectedMessage.deleted) store.dispatch('toggleMessageDeleted') // prevent deleted and archived both
             return store.dispatch('toggleMessageArchived')
                 .then(clearSelectedMessage())
         },
@@ -145,6 +149,9 @@ export default {
             let id = this.selectedMessage.id
             updateMessage(this.selectedMessage, { notes }, this)
         }, 1000)
+    },
+    beforeDestroy() {
+        clearSelectedMessage();
     }
 }
 

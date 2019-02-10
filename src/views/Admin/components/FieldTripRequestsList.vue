@@ -2,16 +2,21 @@
     <div>
         <v-flex class="card">
             <v-toolbar color="brown lighten-3" dark>
-                <v-icon>email</v-icon>
-                <v-toolbar-title>Field Trip Inbox</v-toolbar-title>
+                <v-icon class="header-icon">email</v-icon>
+                <v-flex xs4>
+                    <v-select
+                        :items="mailBoxes"
+                        v-model="selectedMailbox"
+                    ></v-select>
+                </v-flex>
                 <v-spacer></v-spacer>
-                <v-btn icon>
+                <!-- <v-btn icon>
                     <v-icon>search</v-icon>
-                </v-btn>
+                </v-btn> -->
             </v-toolbar>
 
             <v-list three-line>
-                <template v-for="(request, index) in requests">
+                <template v-for="(request, index) in filteredRequests">
                     <v-list-tile
                         :key="request.id"
                         ripple
@@ -61,12 +66,22 @@ import store from '@/store/store'
 export default {
     data() {
         return {
-            requests: null,
-            selectedRequest: store.state.selectedFieldTripRequest || { id: -1 }
+            requests: [],
+            selectedRequest: store.state.selectedFieldTripRequest || { id: -1 },
+            mailBoxes: ['Inbox', 'Archive', 'Trash'],
+            selectedMailbox: 'Inbox'
         }
     },
     async mounted() {
         this.requests = await FieldTripRequestService.getAll()
+    },
+    computed: {
+        filteredRequests() {
+            if (this.selectedMailbox === 'Inbox') return this.requests.filter(r => !r.archived && !r.deleted)
+            else if (this.selectedMailbox === 'Archive') return this.requests.filter(r => r.archived)
+            else if (this.selectedMailbox === 'Trash') return this.requests.filter(r => r.deleted)
+            else return this.requests
+        }
     },
     methods: {
         viewRequest(request) {
@@ -76,7 +91,14 @@ export default {
         formatDate: function(timeStamp) {
             return new Date(timeStamp).toDateString()
         }
+    },
+    watch: {
+        selectedMailbox: () => clearSelectedRequest()
     }
+}
+
+function clearSelectedRequest() {
+    return store.dispatch('setSelectedFieldTripRequest', null)
 }
 
 </script>
@@ -95,4 +117,7 @@ export default {
     background: rgb(220, 220, 220);
 }
 
+.header-icon {
+    margin-right: 10px;
+}
 </style>

@@ -35,6 +35,9 @@ export default new Vuex.Store({
         toggleMessageArchived(state) {
             state.selectedMessage.archived = !state.selectedMessage.archived
         },
+        toggleMessageDeleted(state) {
+            state.selectedMessage.deleted = !state.selectedMessage.deleted
+        },
         updateMessageNotes(state, notes) {
             state.selectedMessage.notes = notes
         },
@@ -46,6 +49,12 @@ export default new Vuex.Store({
         },
         updateFieldTripRequestNotes(state, notes) {
             state.selectedFieldTripRequest.notes = notes
+        },
+        toggleFieldTripRequestArchived(state) {
+            state.selectedFieldTripRequest.archived = !state.selectedFieldTripRequest.archived
+        },
+        toggleFieldTripRequestDeleted(state) {
+            state.selectedFieldTripRequest.deleted = !state.selectedFieldTripRequest.deleted
         },
         logOut(state) {
             state.token = null
@@ -77,6 +86,9 @@ export default new Vuex.Store({
         toggleMessageArchived({ commit }) {
             commit('toggleMessageArchived')
         },
+        toggleMessageDeleted({ commit }) {
+            commit('toggleMessageDeleted')
+        },
         updateMessageNotes({ commit }, notes) {
             commit('updateMessageNotes', notes)
         },
@@ -88,6 +100,12 @@ export default new Vuex.Store({
         },
         updateFieldTripRequestNotes({ commit }, notes) {
             commit('updateFieldTripRequestNotes', notes)
+        },
+        toggleFieldTripRequestArchived({ commit }) {
+            commit('toggleFieldTripRequestArchived')
+        },
+        toggleFieldTripRequestDeleted({ commit }) {
+            commit('toggleFieldTripRequestDeleted')
         },
         logOut({ commit }) {
             localStorage.removeItem('userToken')

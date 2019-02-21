@@ -19,7 +19,15 @@
                         label="Password"
                         data-vv-name="password"
                         required
-                    ></v-text-field>
+                        loading>
+                        <v-progress-linear
+                            v-if="true"
+                            slot="progress"
+                            :value="progress"
+                            :color="color"
+                            height="7"
+                        ></v-progress-linear>
+                    </v-text-field>
                     <div class="error" v-html="error"></div>
                     <br>
                     <v-btn class="brown lighten-2" dark @click="register">Register</v-btn>
@@ -37,6 +45,14 @@ export default {
             email: '',
             password: '',
             error: null
+        }
+    },
+    computed: {
+        progress () {
+            return Math.min(100, this.password.length * 10)
+        },
+        color () {
+            return ['error', 'warning', 'success'][Math.floor(this.progress / 40)]
         }
     },
     methods: {

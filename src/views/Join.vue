@@ -28,8 +28,12 @@
                             height="7"
                         ></v-progress-linear>
                     </v-text-field>
-                    <div class="error" v-html="error"></div>
-                    <br>
+                    <v-alert
+                        v-if="error"
+                        :value="true"
+                        color="error"
+                        v-html="error"
+                    ></v-alert>
                     <v-btn class="brown lighten-2" dark @click="register">Register</v-btn>
                 </div>
             </div>

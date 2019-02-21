@@ -60,6 +60,10 @@ export default new Router({
                     path: 'field_trip_requests',
                     name: 'fieldTripRequests',
                     component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/FieldTripRequests')
+                }, {
+                    path: '2nd_saturday',
+                    name: 'secondSaturday',
+                    component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/secondSaturday')
                 }
             ],
             beforeEnter: (to, from, next) => {

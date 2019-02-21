@@ -17,6 +17,11 @@
                         Field Trip Requests
                     </v-list-tile-content>
                 </v-list-tile>
+                <v-list-tile to="/admin/2nd_saturday">
+                    <v-list-tile-content>
+                        2nd Saturday Program
+                    </v-list-tile-content>
+                </v-list-tile>
             </v-list>
         </v-navigation-drawer>
         <router-view></router-view>
@@ -24,18 +29,7 @@
 </template>
 
 <script>
-import UserService from '@/services/UserService'
 
-export default {
-    data() {
-        return {
-            users: null
-        }
-    },
-    async mounted() {
-        this.users = await UserService.getAllUsers()
-    }
-}
 </script>
 
 <style scoped>

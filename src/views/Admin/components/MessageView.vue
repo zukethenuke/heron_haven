@@ -77,7 +77,6 @@
                                         </span>
                                     </v-list-tile-title>
                                     <v-list-tile-title><span class="right"> {{ selectedMessage.type }} <v-icon class="m-left">info</v-icon></span></v-list-tile-title>
-                                  
                                 </div>
                             </div>
                         </v-list-tile-content>
@@ -105,7 +104,7 @@
 
 <script>
 import store from '@/store/store'
-import ContactUsService from '@/services/ContactUsService';
+import ContactUsService from '@/services/ContactUsService'
 const debounce = require('debounce')
 
 export default {
@@ -146,23 +145,22 @@ export default {
                 .then(clearSelectedMessage())
         },
         debounceInput: debounce(function debounce(notes) {
-            let id = this.selectedMessage.id
             updateMessage(this.selectedMessage, { notes }, this)
         }, 1000)
     },
     beforeDestroy() {
-        clearSelectedMessage();
+        clearSelectedMessage()
     }
 }
 
 function updateMessage(message, data, context) {
-    if (context) context.savingMessage = true;
+    if (context) context.savingMessage = true
     return ContactUsService.update(message.id, data)
         .then((res) => {
             store.dispatch('updateMessageNotes', res.data.notes)
             setTimeout(() => {
-                if (context) context.savingMessage = false;
-            }, 2000);
+                if (context) context.savingMessage = false
+            }, 2000)
         })
 }
 

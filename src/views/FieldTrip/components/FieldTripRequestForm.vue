@@ -166,7 +166,7 @@ export default {
             snackbar: {
                 active: false,
                 color: '',
-                timeout: 6000,
+                timeout: 8000,
                 text: ''
             }
         }
@@ -180,8 +180,6 @@ export default {
                 this.snackbar.color = 'success'
                 this.snackbar.active = true
             } catch(error) {
-                console.log('error', error)
-                this.error = error.response.data.error
                 this.error = error.response.data.error
                 this.snackbar.text = 'Error sending message!  Please call us.'
                 this.snackbar.color = 'error'

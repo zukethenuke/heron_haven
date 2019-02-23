@@ -63,7 +63,7 @@ export default new Router({
                 }, {
                     path: '2nd_saturday',
                     name: 'secondSaturday',
-                    component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/secondSaturday')
+                    component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/SecondSaturday')
                 }
             ],
             beforeEnter: (to, from, next) => {

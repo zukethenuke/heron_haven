@@ -28,6 +28,7 @@
 import SecondSaturdayService from '@/services/SecondSaturdayService'
 
 export default {
+    name: 'secondSaturday',
     data() {
         return {
             file: null,

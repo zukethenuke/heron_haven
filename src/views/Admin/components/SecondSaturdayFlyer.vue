@@ -38,7 +38,6 @@ export default {
                 timeout: 8000,
                 text: ''
             },
-            currentFlyer: null,
             url: null
         }
     },
@@ -68,12 +67,6 @@ export default {
     }
 }
 
-// async function getCurrentFlyer() {
-//     let flyer = await SecondSaturdayService.get()
-//     const file = new Blob([flyer], { type: 'application/pdf' })
-//     let url = window.URL.createObjectURL(file)
-//     return url
-// }
 </script>
 
 <style scoped>

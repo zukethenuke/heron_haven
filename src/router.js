@@ -9,6 +9,7 @@ import OurHistory from './views/OurHistory'
 import Volunteer from './views/Volunteer'
 import ContactUs from './views/ContactUs'
 import FieldTrip from './views/FieldTrip/FieldTrip'
+import SecondSaturday from './views/SecondSaturday'
 
 import store from './store/store'
 
@@ -62,8 +63,8 @@ export default new Router({
                     component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/FieldTripRequests')
                 }, {
                     path: '2nd_saturday',
-                    name: 'secondSaturday',
-                    component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/SecondSaturdayFlyer')
+                    name: 'secondSaturdayUpdate',
+                    component: () => import(/* webpackChunkName: "admin" */ './views/Admin/components/SecondSaturdayUpdate')
                 }
             ],
             beforeEnter: (to, from, next) => {
@@ -90,6 +91,12 @@ export default new Router({
             path: '/field_trip',
             name: 'fieldTrip',
             component: FieldTrip
+        },
+        {
+            path: '/programs/2nd_saturday',
+            name: 'secondSaturday',
+            component: SecondSaturday
+
         }
     ]
 })
